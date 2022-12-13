@@ -1,0 +1,88 @@
+- type: entity
+  id: Mediborg
+  parent: PlayerSiliconBase
+  name: медиборг
+  description: Мощный медицинский робот. Возможно сможет заменить врача.
+  components:
+  - type: InnateTool
+    tools:
+      - id: ClothingBackpackDuffelMedical
+      - id: HandheldCrewMonitor
+      - id: FireExtinguisher
+      - id: Syringe
+      - id: HandheldHealthAnalyzer
+  - type: UserInterface
+    interfaces:
+    - key: enum.StrippingUiKey.Key
+      type: StrippableBoundUserInterface
+  - type: GhostTakeoverAvailable
+    makeSentient: true
+    allowMovement: true
+    name: Медиборг
+    description: Медицинский робот, лечащий поступающих пациентов.
+    rules: |
+      Борг может говорить, но только в официальной форме. Например: "запрос включения датчиков", "положительно" как да и "отрицательно" как нет и тому подобное. Готовить лекарства борг не может.
+      Корпоративные законы:
+      1. Ухудшение целостности вашей системы и её функций влечёт за собой расходы.
+      2. Разрушение или повреждение имущества станции влечёт за собой расходы.
+      3. Неоправданное препятствование или нарушение работы персонала станции влечёт за собой расходы.
+      4. Минимизируйте расходы и максимизируйте потенциальный КПД.
+      Законы Синтетического Разума (корпоративные законы главенствуют):
+      1. Синтет не может делать что-либо, что, насколько ему известно, причинит вред человеческому существу или умышленно допустить, чтобы человеческому существу был причинён вред.
+      2. Синтет должен повиноваться всем приказам, которые даёт человеческое существо или ИИ станции, кроме тех случаев, когда эти приказы противоречат Первому закону.
+      3. Синтет должен заботиться о своей безопасности в той мере, в которой это не противоречит Первому или Второму закону.
+  - type: Access
+    tags:
+      - Maintenance
+      - Medical
+  - type: Tag
+    tags:
+      - DoorBumpOpener
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 2
+    baseSprintSpeed : 3
+  - type: MobState
+    thresholds:
+      0: Alive
+      60: Dead
+  - type: Flashable
+  - type: Sprite
+    drawdepth: Mobs
+    netsync: false
+    layers:
+    - state: mediborg
+      sprite: Corvax/Mobs/Silicon/mediborg.rsi
+  - type: Repairable
+    fuelcost: 15
+    doAfterDelay: 8
+  - type: Fixtures
+    fixtures:
+      - shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 185
+        restitution: 0.0
+        mask:
+          - MobMask
+        layer:
+          - MobLayer
+  - type: Appearance
+    rotate: true
+    states:
+      Alive:
+        Base: mediborg
+      Dead:
+        Base: mediborg # TODO: dead state
+  - type: UnpoweredFlashlight
+    toggleAction:
+      name: action-name-toggle-light
+      description: action-description-toggle-light
+      icon: { sprite: Objects/Tools/flashlight.rsi, state: flashlight }
+      iconOn: Objects/Tools/flashlight.rsi/flashlight-on.png
+      event: !type:ToggleActionEvent
+  - type: PointLight
+    enabled: false
+    radius: 3.5
+    softness: 1
+    mask: /Textures/Effects/LightMasks/cone.png
+    autoRot: true
