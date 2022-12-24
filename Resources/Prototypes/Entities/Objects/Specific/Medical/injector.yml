@@ -1,8 +1,8 @@
 - type: entity
-  name: injector
-  parent: BaseItem
-  description: "TODO: ADD INJECTING"
   id: MedicalInjector
+  parent: BaseItem
+  name: injector
+  description: "Advanced tool to draw blood and inject reagents. Faster than syringe, cheaper then hyposprays so it experienced recent popularity boom."
   components:
     - type: Sprite
       sprite: Objects/Specific/Chemistry/injector.rsi
@@ -31,4 +31,3 @@
     - type: SolutionContainerVisuals
       maxFillLevels: 3
       fillBaseName: injector
-    - type:
