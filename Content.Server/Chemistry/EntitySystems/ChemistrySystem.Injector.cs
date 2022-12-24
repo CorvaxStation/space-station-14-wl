@@ -27,7 +27,7 @@ public sealed partial class ChemistrySystem
     /// <summary>
     ///     Default transfer amounts for the set-transfer verb.
     /// </summary>
-    public static readonly List<int> TransferAmounts = new() {1, 5, 10, 15};
+    public static readonly List<int> TransferAmounts = new() {1, 5, 10, 15, 20, 30};
     private void InitializeInjector()
     {
         SubscribeLocalEvent<InjectorComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
@@ -239,11 +239,19 @@ public sealed partial class ChemistrySystem
 
         if (!_solutions.TryGetSolution(component.Owner, InjectorComponent.SolutionName, out var solution))
             return;
+        var actualDelay = 0f;
 
-        var actualDelay = MathF.Max(component.Delay, 1f);
+        if (component.FixedDelay <= 0)
+        {
+            actualDelay = MathF.Max(component.Delay, 1f);
 
-        // Injections take 1 second longer per additional 5u
-        actualDelay += (float) component.TransferAmount / component.Delay - 1;
+            // Injections take 1 second longer per additional 5u
+            actualDelay += (float) component.TransferAmount / component.Delay - 1;
+        }
+        else
+        {
+            actualDelay = component.FixedDelay;
+        }
 
         if (user != target)
         {
