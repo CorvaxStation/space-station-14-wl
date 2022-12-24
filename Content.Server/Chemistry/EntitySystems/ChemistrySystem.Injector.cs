@@ -93,6 +93,10 @@ public sealed partial class ChemistrySystem
             if (_solutions.TryGetInjectableSolution(target, out var injectableSolution))
             {
                 TryInject(component, target, injectableSolution, user, false);
+                if (component.OnUseSound != null)
+                {
+                    _audio.Play(_audio.GetSound(component.OnUseSound), Filter.Pvs(user), user, false);
+                }
             }
             else if (_solutions.TryGetRefillableSolution(target, out var refillableSolution))
             {
@@ -101,6 +105,10 @@ public sealed partial class ChemistrySystem
             else if (TryComp<BloodstreamComponent>(target, out var bloodstream))
             {
                 TryInjectIntoBloodstream(component, bloodstream, user);
+                if (component.OnUseSound != null)
+                {
+                    _audio.Play(_audio.GetSound(component.OnUseSound), Filter.Pvs(user), user, false);
+                }
             }
             else
             {

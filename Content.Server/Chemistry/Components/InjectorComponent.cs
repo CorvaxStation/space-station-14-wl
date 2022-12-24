@@ -1,6 +1,7 @@
 using System.Threading;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 
 namespace Content.Server.Chemistry.Components
 {
@@ -75,6 +76,10 @@ namespace Content.Server.Chemistry.Components
         ///     component is currently "in use".
         /// </summary>
         public CancellationTokenSource? CancelToken;
+
+        [ViewVariables]
+        [DataField("unUseSound")]
+        public SoundSpecifier? OnUseSound = null;
 
         [DataField("toggleState")] private InjectorToggleMode _toggleState;
 
