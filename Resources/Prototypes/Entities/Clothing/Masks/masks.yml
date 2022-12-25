@@ -176,6 +176,8 @@
     softness: 5
     mask: /Textures/Effects/LightMasks/cone.png
     autoRot: true
+  - type: Item
+    size: 8
 
 - type: entity
   parent: ClothingMaskBase
