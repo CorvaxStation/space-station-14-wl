@@ -25,6 +25,10 @@
       injectOnly: false
       fixedDelay: 2
       maxTransferAmount: 30
+      onUseStartSound:
+        path: /Audio/Items/click.ogg
+      onUseFinishSound:
+        path: /Audio/Items/hypospray.ogg
     - type: Spillable
       solution: injector
     - type: Appearance

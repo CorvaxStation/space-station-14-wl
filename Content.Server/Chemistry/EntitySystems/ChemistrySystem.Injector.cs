@@ -93,9 +93,9 @@ public sealed partial class ChemistrySystem
             if (_solutions.TryGetInjectableSolution(target, out var injectableSolution))
             {
                 TryInject(component, target, injectableSolution, user, false);
-                if (component.OnUseSound != null)
+                if (component.OnUseFinishSound != null)
                 {
-                    _audio.Play(_audio.GetSound(component.OnUseSound), Filter.Pvs(user), user, false);
+                    _audio.Play(_audio.GetSound(component.OnUseFinishSound), Filter.Pvs(user), user, false);
                 }
             }
             else if (_solutions.TryGetRefillableSolution(target, out var refillableSolution))
@@ -105,9 +105,9 @@ public sealed partial class ChemistrySystem
             else if (TryComp<BloodstreamComponent>(target, out var bloodstream))
             {
                 TryInjectIntoBloodstream(component, bloodstream, user);
-                if (component.OnUseSound != null)
+                if (component.OnUseFinishSound != null)
                 {
-                    _audio.Play(_audio.GetSound(component.OnUseSound), Filter.Pvs(user), user, false);
+                    _audio.Play(_audio.GetSound(component.OnUseFinishSound), Filter.Pvs(user), user, false);
                 }
             }
             else
@@ -298,6 +298,11 @@ public sealed partial class ChemistrySystem
         }
 
         component.CancelToken = new CancellationTokenSource();
+
+        if (component.OnUseStartSound != null)
+        {
+            _audio.Play(_audio.GetSound(component.OnUseStartSound), Filter.Pvs(component.Owner), component.Owner, true);
+        }
 
         _doAfter.DoAfter(new DoAfterEventArgs(user, actualDelay, component.CancelToken.Token, target)
         {

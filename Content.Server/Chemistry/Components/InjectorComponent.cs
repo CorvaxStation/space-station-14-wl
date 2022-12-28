@@ -78,8 +78,12 @@ namespace Content.Server.Chemistry.Components
         public CancellationTokenSource? CancelToken;
 
         [ViewVariables]
-        [DataField("unUseSound")]
-        public SoundSpecifier? OnUseSound = null;
+        [DataField("onUseStartSound")]
+        public SoundSpecifier? OnUseStartSound;
+
+        [ViewVariables]
+        [DataField("onUseFinishSound")]
+        public SoundSpecifier? OnUseFinishSound;
 
         [DataField("toggleState")] private InjectorToggleMode _toggleState;
 

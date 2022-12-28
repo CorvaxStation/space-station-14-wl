@@ -33,7 +33,7 @@
         },
         {
             "name": "inhand-left",
-            "direction": 4
+            "directions": 4
         },
         {
             "name": "inhand-right",
