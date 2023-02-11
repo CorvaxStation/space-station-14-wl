@@ -18,6 +18,10 @@
                     0.01
                 ]
             ]
-        }
+        },
+		{
+			"name": "assembly",
+			"directions": 1
+		}
     ]
 }
