@@ -300,6 +300,21 @@
   objectType: Structure
   canRotate: true
 
+- type: construction
+  name: tiny fan
+  id: AtmosDeviceFanTiny
+  graph: AtmosDeviceFanTiny
+  startNode: start
+  targetNode: atmosdevicefantiny
+  category: construction-category-structures
+  description: A tiny fan, releasing a thin gust of air.
+  icon:
+    sprite: Structures/Piping/Atmospherics/tinyfan.rsi
+    state: icon
+  placementMode: SnapgridCenter
+  objectType: Structure
+  canRotate: false
+
 # ATMOS PIPES
 - type: construction
   name: gas pipe half
