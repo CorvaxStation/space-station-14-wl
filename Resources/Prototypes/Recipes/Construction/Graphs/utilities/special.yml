@@ -1,0 +1,45 @@
+- type: constructionGraph
+  id: AtmosDeviceFanTiny
+  
+  start: start
+  graph:
+    - node: start
+      edges: 
+        - to: assembly
+          steps:
+            - material: Silver
+              amount: 2
+              doAfter: 3
+
+    - node: assembly
+      entity: AtmosDeviceFanTinyAssembly
+      edges:
+        - to: wired
+          steps:
+          - material: Cable
+            amount: 2
+            doAfter: 3
+    
+    - node: wired
+      entity: AtmosDeviceFanTinyAssembly
+      edges:
+        - to: atmosdevicefantiny
+          steps:
+            - tool: Screwing
+              doAfter: 2
+
+    - node: atmosdevicefantiny
+      entity: AtmosDeviceFanTiny
+      edges:
+        - to: start
+          steps:
+            - tool: Screwing
+              doAfter: 5
+          completed:
+            - !type:SpawnPrototype
+              prototype: IngotSilver1
+              amount: 2
+            - !type:SpawnPrototype
+              prototype: CableApcStack1
+              amount: 2
+            - !type:DeleteEntity
